@@ -44,11 +44,13 @@
 
         android:id="@+id/port_edit_text"
 
-        android:layout_width="274dp"
+        android:layout_width="0dp"
 
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
 
         android:layout_marginStart="16dp"
+
+        android:layout_marginTop="4dp"
 
         android:layout_marginEnd="16dp"
 
@@ -59,8 +61,7 @@
         android:inputType="textPersonName"
 
         app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/port_text_view"
         app:layout_constraintTop_toTopOf="@+id/port_text_view" />
 
@@ -101,11 +102,13 @@
 
         android:id="@+id/ip_edit_text"
 
-        android:layout_width="288dp"
+        android:layout_width="0dp"
 
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
 
         android:layout_marginStart="16dp"
+
+        android:layout_marginTop="8dp"
 
         android:layout_marginEnd="16dp"
 
@@ -117,7 +120,7 @@
 
         app:layout_constraintEnd_toEndOf="parent"
 
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ip_text_view"
         app:layout_constraintTop_toTopOf="@+id/ip_text_view" />
 

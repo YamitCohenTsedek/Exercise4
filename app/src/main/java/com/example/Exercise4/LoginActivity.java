@@ -16,13 +16,17 @@ public class LoginActivity extends AppCompatActivity {
     private EditText ipEditText;
     private EditText portEditText;
 
+
+    //initialize login activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        // find the ip, port and the connect button
         ipEditText = findViewById(R.id.ip_edit_text);
         portEditText = findViewById(R.id.port_edit_text);
         connectButton = findViewById(R.id.connectButton);
+        // set an onClickListener to the connect button that will open the joystick activity
         connectButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ip = ipEditText.getText().toString();
@@ -32,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
+    
     public void openJoystickActivity() {
         Intent intent = new Intent(this, JoystickActivity.class);
         startActivity(intent);

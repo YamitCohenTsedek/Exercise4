@@ -13,7 +13,6 @@ public class ClientSide {
     private String ip;
     private int port;
     private Socket clientSocket = null;
-    private Boolean isConnectedToSimulator = false;
     private OutputStream stream;
     private PrintWriter writer;
     private static ClientSide instance = null;
@@ -21,23 +20,29 @@ public class ClientSide {
     private ClientSide() {
     }
 
+    // singleton design pattern
     public static ClientSide getInstance() {
         if(instance == null)
             instance = new ClientSide();
         return instance;
     }
 
+    // set the ip and the port for the communication
     public void setIpAndPort(String ip, int port) {
         this.ip = ip;
         this.port = port;
     }
 
+    // connect to the server
     public void Connect() {
+        // define a runnable that applies the connection to the server
         Runnable runnable = new Runnable() {
             public void run() {
                 try {
                     InetAddress serverAddress = InetAddress.getByName(ip);
+                    // create a new socket
                     clientSocket = new Socket(serverAddress, port);
+                    // get the output stream from the socket and wrap it with a writer
                     stream = clientSocket.getOutputStream();
                     writer = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
                 } catch(IOException e){
@@ -45,13 +50,15 @@ public class ClientSide {
                 }
             }
         };
+        // run the runnable in a separate thread
         Thread thread = new Thread(runnable);
         thread.start();
     }
 
-    // send the commands to the simulator
+    // send commands to the simulator (the server)
     public void SendCommandsToSimulator(final String command)
     {
+        // define a runnable that writes messages to the server
         Runnable runnable = new Runnable() {
             public void run() {
                 try {
@@ -65,18 +72,16 @@ public class ClientSide {
                 }
             }
         };
+        // run the runnable in a separate thread
         Thread thread = new Thread(runnable);
         thread.start();
     }
 
-    /* close the connection with the server */
+    // close the connection to the server
     public void closeSocket() {
         try {
             if(clientSocket != null) {
                 clientSocket.close();
-                isConnectedToSimulator = false;
-            } else {
-                return;
             }
         } catch (IOException e) {
             e.printStackTrace();
