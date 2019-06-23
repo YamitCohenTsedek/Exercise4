@@ -1,24 +1,18 @@
 package com.example.Exercise4;
-
 import android.util.Log;
-
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
+
 public class ClientSide {
     private String ip;
     private int port;
     private Socket clientSocket = null;
-    private OutputStream stream;
     private PrintWriter writer;
     private static ClientSide instance = null;
-
-    private ClientSide() {
-    }
 
     // singleton design pattern
     public static ClientSide getInstance() {
@@ -39,11 +33,10 @@ public class ClientSide {
         Runnable runnable = new Runnable() {
             public void run() {
                 try {
-                    InetAddress serverAddress = InetAddress.getByName(ip);
+                    InetAddress serverAdd = InetAddress.getByName(ip);
                     // create a new socket
-                    clientSocket = new Socket(serverAddress, port);
+                    clientSocket = new Socket(serverAdd, port);
                     // get the output stream from the socket and wrap it with a writer
-                    stream = clientSocket.getOutputStream();
                     writer = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
                 } catch(IOException e){
                     e.printStackTrace();
@@ -63,7 +56,7 @@ public class ClientSide {
             public void run() {
                 try {
                     if (clientSocket != null && writer != null) {
-                        writer.println(command);
+                        writer.print(command);
                         writer.flush();
                     }
                 }

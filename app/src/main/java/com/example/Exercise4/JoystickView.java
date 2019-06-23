@@ -79,7 +79,7 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
                 DrawJoystick(newX, newY);
                 float aileronValue = (newX - centerX) / bigRadius;
                 float elevatorValue = (newY - centerY) / bigRadius;
-                // send set commands to the new position to the simulator
+                // send set commands with the new position to the simulator
                 ClientSide.getInstance().SendCommandsToSimulator(aileronSetCommand + aileronValue + "\r\n");
                 ClientSide.getInstance().SendCommandsToSimulator(elavatorSetCommand + elevatorValue + "\r\n");
             }
@@ -94,7 +94,7 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
         return true;
     }
 
-    // when the surface is created, initialize the view settings and redraw the joystick
+    // when the surface is created, initialize the view settings and draw the joystick
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
         initializeViewSettings();
